@@ -2,6 +2,7 @@ package io.shashanktyagi.metrics.lettuce;
 
 import com.codahale.metrics.Snapshot;
 import com.codahale.metrics.Timer;
+import com.lambdaworks.redis.metrics.CommandMetrics;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author Shashank Tyagi
  * @since 0.1
  */
-public class CodeHaleCommandMetrics extends com.lambdaworks.redis.metrics.CommandMetrics {
+public class CodeHaleCommandMetrics extends CommandMetrics {
   private Timer timer;
   private TimeUnit timeUnit;
 
