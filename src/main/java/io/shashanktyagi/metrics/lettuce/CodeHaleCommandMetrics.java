@@ -2,12 +2,17 @@ package io.shashanktyagi.metrics.lettuce;
 
 import com.codahale.metrics.Snapshot;
 import com.codahale.metrics.Timer;
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.lambdaworks.redis.metrics.CommandMetrics;
 
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static javax.swing.UIManager.put;
 
 /**
  * Latency metrics for commands. This class provides the count, time unit and firstResponse/completion latencies.
@@ -33,14 +38,13 @@ public class CodeHaleCommandMetrics extends CommandMetrics {
     public CodeHaleCommandLatency(Snapshot snapshot, final TimeUnit timeUnit) {
       super(snapshot.getMin(),
           snapshot.getMax(),
-          new HashMap<Double, Long>(5) {{
-            put(75.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get75thPercentile()), TimeUnit.NANOSECONDS));
-            put(95.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get95thPercentile()), TimeUnit.NANOSECONDS));
-            put(98.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get98thPercentile()), TimeUnit.NANOSECONDS));
-            put(99.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get99thPercentile()), TimeUnit.NANOSECONDS));
-            put(99.9d, timeUnit.convert(Double.doubleToLongBits(snapshot.get999thPercentile()), TimeUnit.NANOSECONDS));
-          }}
-      );
+          ImmutableMap.of(
+              75.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get75thPercentile()), TimeUnit.NANOSECONDS),
+              95.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get95thPercentile()), TimeUnit.NANOSECONDS),
+              98.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get98thPercentile()), TimeUnit.NANOSECONDS),
+              99.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get99thPercentile()), TimeUnit.NANOSECONDS),
+              99.9d, timeUnit.convert(Double.doubleToLongBits(snapshot.get999thPercentile()), TimeUnit.NANOSECONDS)
+          );
     }
   }
 }
