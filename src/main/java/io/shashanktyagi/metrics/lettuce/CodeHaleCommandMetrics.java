@@ -44,7 +44,7 @@ public class CodeHaleCommandMetrics extends CommandMetrics {
               98.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get98thPercentile()), TimeUnit.NANOSECONDS),
               99.0d, timeUnit.convert(Double.doubleToLongBits(snapshot.get99thPercentile()), TimeUnit.NANOSECONDS),
               99.9d, timeUnit.convert(Double.doubleToLongBits(snapshot.get999thPercentile()), TimeUnit.NANOSECONDS)
-          );
+          ));
     }
   }
 }
