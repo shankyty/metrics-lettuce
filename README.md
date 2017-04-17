@@ -1,2 +1,2 @@
 # metrics-lettuce
-Adds code hale metrics support with lettuce clients.
+Adds code hale metrics support for lettuce client.
